@@ -56,3 +56,34 @@ Exemples : le créateur du ticket vient de l'**ID utilisateur dans le JWT** ; le
 ## 7. Recherche d'emploi
 - Tracker créé : 23 offres .NET vérifiées (5 priorité A).
 - Constat : la plupart des offres demandent Bac+5 et 3 ans → il faut un portfolio solide et du contact direct.
+
+## Jour 2 — jeudi 8 octobre 2026
+
+### Réalisé
+- SupportFlow (`fix/warnings`) : corrigé 3 × CS0168 (`catch (UnauthorizedAccessException)` sans variable)
+- SupportFlow : corrigé les CS8604 de `TicketsController` avec un helper `TryGetCurrentUser` (`int.TryParse` + `Enum.TryParse`, renvoie `401 Unauthorized` si les claims sont invalides)
+- Tests : 60/60 réussis — commit `fix: safely read user claims in TicketsController`
+- CV français V5 finalisé (1 page, SupportFlow mis en avant, liens GitHub/LinkedIn cliquables)
+
+### Appris
+- `List<T>` : collection ordonnée (ex. : les tickets d'un utilisateur). `Dictionary<TKey, TValue>` : clé unique → valeur, recherche rapide (ex. : utilisateur par email)
+- `TryGetValue` : évite `KeyNotFoundException` et ne fait qu'une seule recherche
+- `finally` s'exécute **toujours** (erreur ou non, même après `return`) → sert au nettoyage
+- Attraper l'exception précise : `catch (Exception)` cacherait de vrais bugs (`NullReferenceException`)
+- `Parse` lève une exception si le texte est invalide ; `TryParse` renvoie `true/false` et donne le résultat via `out`
+- 401 Unauthorized = « je ne sais pas qui tu es » ; 403 Forbidden = « je sais qui tu es, mais tu n'as pas le droit »
+
+### Quiz du soir
+- Score : 3/6 justes, 2 incomplètes, 1 fausse (`finally`) → à revoir demain
+
+### Bilan
+- Heures travaillées : ~4 h / 6 h prévues
+- Difficulté : rien de particulier
+- À améliorer : commencer à l'heure. Demain est le dernier jour en retard ; à partir du lundi 12 octobre, horaire du planning respecté.
+
+### Demain (vendredi 9 octobre)
+- Candidatures Oceane (2 offres) avec le CV FR
+- CV anglais → candidature Forterro
+- Warnings restants : CS8618, CS8602, MSB3277
+- LINQ de base, IEnumerable vs IQueryable
+- Test fichier vierge, entretien blanc, bilan de la semaine
